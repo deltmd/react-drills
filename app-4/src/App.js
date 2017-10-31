@@ -1,20 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 
 class App extends Component {
+  constructor(){
+    super()
+    this.state = {
+      user: '',
+      pass: ''
+    }
+  }
+  changeUser(val){
+    this.setState({
+      user: val
+    })
+    this.alertLog = this.alertLog.bind(this);
+  }
+  changePass(val) {
+    this.setState({
+      pass:val
+    })
+  }
+  alertLog(){
+    alert(`Username: ${this.state.user} Password: ${this.state.pass}`)
+  }
+  
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div style={{'display':'flex', 'justify-content':'center'}}>
+        <input type="text" name="" id="" onChange={e=>this.changeUser(e.target.value)}/>
+        <input type="text" name="" id="" onChange={e => this.changePass(e.target.value)}/>
+        <button onClick={this.alertLog}>Login</button>
       </div>
-    );
+    )
   }
 }
 

@@ -1,18 +1,38 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Todo from './Todo.js';
+
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      todoStr: '',
+      todoArr: []
+    }
+    this.todoStrUpdater = this.todoStrUpdater.bind(this);
+    this.todoArrUpdater = this.todoArrUpdater.bind(this);
+  }
+
+  todoStrUpdater(val){
+    this.setState({
+      todoStr: val
+    })
+  }
+  todoArrUpdater(){
+    var newArr = this.state.todoArr;
+    newArr.unshift(this.state.todoStr);
+    this.setState({
+      todoArr: newArr
+    })
+  }
+  
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div >
+       <h1>My to-do list:</h1>
+       <input type="text" onChange={e=>this.todoStrUpdater(e.target.value)}/>
+       <button onClick={this.todoArrUpdater}>Add</button>
+       <Todo list={this.state.todoArr}/>
       </div>
     );
   }
